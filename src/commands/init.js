@@ -15,10 +15,18 @@ export const init = function () {
   const configContent = {
     repoInitialized: true,
   };
+  const stagingContent = {
+    stagedFiles: [],
+  };
 
   fs.writeFileSync(
     path.join(quarkDir, "config.json"),
     JSON.stringify(configContent)
+  );
+
+  fs.writeFileSync(
+    path.join(quarkDir, "staging.json"),
+    JSON.stringify(stagingContent)
   );
 
   console.log("Quark initialized!!");
