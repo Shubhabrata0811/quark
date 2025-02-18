@@ -1,0 +1,27 @@
+{
+  "name": "quark",
+  "version": "1.0.0",
+  "description": "Quark is a lightweight, modular version control system inspired by Git.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shubhabrata0811/quark.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shubhabrata0811/quark/issues"
+  },
+  "homepage": "https://github.com/Shubhabrata0811/quark#readme",
+  "bin": {
+    "quark": "./bin/cli.js"
+  },
+  "type": "module"
+}
