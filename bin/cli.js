@@ -2,30 +2,28 @@
 
 import fs from "fs";
 import path from "path";
-import { init } from "../src/commands/init.js";
-import { add } from "../src/commands/add.js";
+import { QuarkClient } from "../src/quark-client.js";
+import { Init } from "../src/commands/commands-index.js";
+
+const quarkClient = new QuarkClient();
 
 const command = process.argv[2];
-
 const commandArgs = process.argv.slice(3);
 
-const quarkMain = function () {
-  if (command === "add") {
-    if (!fs.existsSync(path.join(process.cwd(), ".quark"))) {
-      console.log(
-        "Not a quark repository. To initialized quark run 'quark init'."
-      );
-      process.exit(1);
-    }
-    add(commandArgs);
-  } else {
-    console.log("Unknown quark command: %s", command);
-    process.exit(1);
-  }
+const handelInit = () => {
+  const command = new Init();
+  quarkClient.run(command);
 };
 
-if (command === "init") {
-  init();
-} else {
-  quarkMain();
+const quarkMain = function () {
+};
+
+switch (command) {
+  case "init": {
+    handelInit();
+    break;
+  }
+  default: {
+    quarkMain();
+  }
 }

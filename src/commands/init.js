@@ -1,33 +1,36 @@
 import fs from "fs";
 import path from "path";
 
-export const init = function () {
-  const quarkDir = path.join(process.cwd(), ".quark");
+class Init {
+  constructor() {}
 
-  if (fs.existsSync(quarkDir)) {
-    console.log("Quark repo is already initialized");
-    return;
+  static createQuarkDir() {
+    fs.mkdirSync(path.join(process.cwd(), ".quark"), { recursive: true });
+    fs.mkdirSync(path.join(process.cwd(), ".quark", "objects"), {
+      recursive: true,
+    });
+    fs.mkdirSync(path.join(process.cwd(), ".quark", "refs"), {
+      recursive: true,
+    });
+
+    fs.writeFileSync(
+      path.join(process.cwd(), ".quark", "HEAD"),
+      "ref: refs/heads/main\n"
+    );
+    console.log("Initialized quark directory!!");
   }
 
-  fs.mkdirSync(quarkDir, { recursive: true });
-  fs.mkdirSync(path.join(quarkDir, "objects"));
+  execute() {
+    const quarkDir = path.join(process.cwd(), ".quark");
 
-  const configContent = {
-    repoInitialized: true,
-  };
-  const stagingContent = {
-    stagedFiles: [],
-  };
+    if (fs.existsSync(quarkDir)) {
+      console.log("Quark repo is already initialized!!");
+      return;
+    }
+    Init.createQuarkDir();
+  }
+}
 
-  fs.writeFileSync(
-    path.join(quarkDir, "config.json"),
-    JSON.stringify(configContent)
-  );
-
-  fs.writeFileSync(
-    path.join(quarkDir, "staging.json"),
-    JSON.stringify(stagingContent)
-  );
-
-  console.log("Quark initialized!!");
-};
+export {
+  Init
+}
