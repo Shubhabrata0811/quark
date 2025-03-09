@@ -1,2 +1,4 @@
 import { Init } from "./init.js";
-export { Init };
+import { HashObject } from "./hash-object.js";
+import { CatFile } from "./cat-file.js";
+export { Init, HashObject, CatFile };
